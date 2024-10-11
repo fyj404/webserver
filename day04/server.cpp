@@ -25,6 +25,8 @@ int main() {
     Epoll *ep = new Epoll();
     serv_sock->setnonblocking();
     ep->addFd(serv_sock->getFd(), EPOLLIN | EPOLLET);
+    //创建一个 Epoll 实例，并将服务套接字设置为非阻塞模式。
+    //将服务套接字添加到 epoll 监视列表中，关注可读事件（EPOLLIN）和边缘触发模式（EPOLLET）。
     while(true){
         std::vector<epoll_event> events = ep->poll();
         int nfds = events.size();
@@ -56,9 +58,15 @@ void handleReadEvent(int sockfd){
             printf("message from client fd %d: %s\n", sockfd, buf);
             write(sockfd, buf, sizeof(buf));
         } else if(bytes_read == -1 && errno == EINTR){  //客户端正常中断、继续读取
+            //在非阻塞I/O的场景下，可能会因为信号中断（EINTR）导致读取操作中途被打断。
+            //在这种情况下，程序不会退出读取，而是会继续循环读取数据。这里的处理方式是输出提示信息，跳过这次中断，继续从read()读取。
             printf("continue reading");
             continue;
         } else if(bytes_read == -1 && ((errno == EAGAIN) || (errno == EWOULDBLOCK))){//非阻塞IO，这个条件表示数据全部读取完毕
+            //在非阻塞模式下，如果当前没有数据可以读取，read()会返回-1，并且errno被设置为EAGAIN或EWOULDBLOCK。
+            //这并不是一个错误，而是告诉我们当前没有更多的数据可以读取了。此时，程序会跳出循环，因为已经读取完了当前客户端可提供的数据。
+            //EAGAIN 和 EWOULDBLOCK 基本上没有区别，它们在大多数系统上是等价的，但它们出现的场景和历史背景稍有不同
+            //在许多现代系统中（例如Linux），两者被定义为相同的值，EWOULDBLOCK只是EAGAIN的别名。因此，当你处理非阻塞I/O操作时，通常只需要检查一个即可。
             printf("finish reading once, errno: %d\n", errno);
             break;
         } else if(bytes_read == 0){  //EOF，客户端断开连接
