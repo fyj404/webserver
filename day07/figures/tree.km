@@ -1,0 +1,118 @@
+{
+    "root": {
+        "data": {
+            "id": "d4szqzvhb680",
+            "created": 1728651316902,
+            "text": "Server类"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "d4ucft7erq80",
+                    "created": 1728788674765,
+                    "text": " EventLoop *loop"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "d4ucmd1ny4o0",
+                            "created": 1728789188139,
+                            "text": "Epoll *ep"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "d4ucmyn3mt40",
+                            "created": 1728789235147,
+                            "text": "死循环执行 loop函数"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d4ucn2vcg3s0",
+                                    "created": 1728789244353,
+                                    "text": "检查 ep的事件,并执行对应channel的handleEvent函数"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "d4ucg9ox4oo0",
+                    "created": 1728788710653,
+                    "text": "Acceptor * acceptor"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "d4ucl50qr8g0",
+                            "created": 1728789092304,
+                            "text": "使用Channel"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d4uclext9vk0",
+                                    "created": 1728789113895,
+                                    "text": "Channel回调函数(handleEvent)为acceptConnection函数"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "d4uciog3eeo0",
+                                            "created": 1728788899499,
+                                            "text": "acceptConnection函数"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "d4ucjgx899c0",
+                                                    "created": 1728788961485,
+                                                    "text": "执行写好的回调函数newConnection"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "data": {
+                                                            "id": "d4ucp634ylc0",
+                                                            "created": 1728789408083,
+                                                            "text": "新建client的channel 用于监听收发数据"
+                                                        },
+                                                        "children": []
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "d4ucm1i2exs0",
+                                    "created": 1728789163009,
+                                    "text": "这个Channel加入到loop中"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "d4uchdrxbfs0",
+                    "created": 1728788797906,
+                    "text": "发生新连接时要执行的函数newConnection",
+                    "priority": null
+                },
+                "children": []
+            }
+        ]
+    },
+    "template": "default",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}
