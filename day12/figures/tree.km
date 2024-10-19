@@ -1,0 +1,127 @@
+{
+    "root": {
+        "data": {
+            "id": "d4szqzvhb680",
+            "created": 1728651316902,
+            "text": "Server类"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "d4ucft7erq80",
+                    "created": 1728788674765,
+                    "text": " EventLoop *loop_acc 负责监听新的连接,也叫main Reactor"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "d4ucmd1ny4o0",
+                            "created": 1728789188139,
+                            "text": "Epoll *ep"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "d4ucmyn3mt40",
+                            "created": 1728789235147,
+                            "text": "死循环执行 loop函数"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d4ucn2vcg3s0",
+                                    "created": 1728789244353,
+                                    "text": "检查 ep的事件,并执行对应channel的handleEvent函数"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "d4zl1qnro4g0",
+                            "created": 1729320761898,
+                            "text": "Acceptor * acceptor"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d4zl22v6fvs0",
+                                    "created": 1729320788468,
+                                    "text": "当有新client时会创建connect"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "d4ucg9ox4oo0",
+                    "created": 1728788710653,
+                    "text": "线程池,每个线程里有一个EventLoop,也叫subReactor",
+                    "layout_mind_offset": {
+                        "x": -1.9999999701976776,
+                        "y": 20.99999968707567
+                    }
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "d4zl30qmm1s0",
+                            "created": 1729320862203,
+                            "text": "用于监听connect的channel"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "d4zl3i8lhxk0",
+                            "created": 1729320900295,
+                            "text": "使用map记录每个sockid在哪个线程的loop里"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "d4zl90z153k0",
+                            "created": 1729321332896,
+                            "text": "connect监听收发数据"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "d4zl9ous5js0",
+                                    "created": 1729321384882,
+                                    "text": " "
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "d4zl9w5e5gg0",
+                            "created": 1729321400761,
+                            "text": "一个线程/一个subReactor监听多个connect. 在loop函数里会依次调用该线程监听的connect.然后顺序处理"
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "d4zl3d9k2xc0",
+                    "created": 1729320889469,
+                    "text": "分支主题"
+                },
+                "children": []
+            }
+        ]
+    },
+    "template": "default",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}
