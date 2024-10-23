@@ -63,5 +63,6 @@
         "string": "cpp",
         "string_view": "cpp",
         "variant": "cpp"
-    }
+    },
+    "ros.distro": "melodic"
 }
