@@ -1,4 +1,3 @@
-
 #include "log.h"
 Log::Log() {
     lineCount_ = 0;
